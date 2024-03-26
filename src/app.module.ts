@@ -3,6 +3,7 @@ import {AppController} from './app.controller';
 import {AppService} from './app.service';
 import {TypeOrmModule} from "@nestjs/typeorm";
 import { CoffeesController } from './coffess/coffeesController';
+import { CoffeesService } from './coffess/coffees.service';
 
 @Module({
     imports: [TypeOrmModule.forRoot({
@@ -15,7 +16,7 @@ import { CoffeesController } from './coffess/coffeesController';
         synchronize: true,
     }), ],
     controllers: [AppController, CoffeesController],
-    providers: [AppService],
+    providers: [AppService, CoffeesService],
 })
 export class AppModule {
 }
