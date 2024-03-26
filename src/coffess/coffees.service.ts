@@ -1,4 +1,4 @@
-import {Injectable} from '@nestjs/common';
+import {HttpException, Injectable} from '@nestjs/common';
 import {Coffee} from "./model/Coffee.entity";
 
 @Injectable()
@@ -17,8 +17,14 @@ export class CoffeesService {
         return this.coffess;
     }
 
-    findOne(id: number) {
-        return this.coffess.find(item => item.id === +id);
+    findOne(id: number): Coffee | HttpException {
+
+        const coffee = this.coffess.find(item => item.id === +id);
+
+        if (!coffee) {
+            return new HttpException(`coffee ${id} not found`, 404);
+        }
+        return coffee;
     }
 
     create(createCoffeeDto: any) {
