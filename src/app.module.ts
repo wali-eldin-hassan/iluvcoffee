@@ -6,13 +6,14 @@ import {CoffeesModule} from './coffess/coffees.module';
 
 @Module({
     imports: [TypeOrmModule.forRoot({
-        type: 'mysql',
+        type: 'postgres',
         host: 'localhost',
-        port: 3306,
-        database: 'demo',
-        username: 'root',
-        password: 'password',
+        port: 5432,
+        database: 'postgres',
+        username: 'postgres',
+        password: 'pass123',
         synchronize: true,
+        autoLoadEntities:true,
     }), CoffeesModule,],
     controllers: [AppController],
     providers: [AppService],
