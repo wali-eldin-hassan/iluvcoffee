@@ -1,4 +1,4 @@
-import {HttpException, Injectable, NotFoundException} from '@nestjs/common';
+import { Injectable, NotFoundException} from '@nestjs/common';
 import {Coffee} from "./model/Coffee.entity";
 import {InjectRepository} from "@nestjs/typeorm";
 import {Repository} from "typeorm";
@@ -18,10 +18,10 @@ export class CoffeesService {
 
     async findOne(id: number) {
 
-        const coffee = await this.coffeeRepository.findOne(id);
+        const coffee = await this.coffeeRepository.findOne({ where: { id } });
 
         if (!coffee) {
-            return new HttpException(`coffee ${id} not found`, 404);
+            throw new NotFoundException("coffee not found");
         }
         return coffee;
     }
@@ -47,7 +47,7 @@ export class CoffeesService {
 
     async destroy(id: number) {
 
-        const existing = await this.coffeeRepository.findOne(id);
+        const existing = await this.coffeeRepository.findOne({ where: { id } });
 
         return this.coffeeRepository.remove(existing);
     }
