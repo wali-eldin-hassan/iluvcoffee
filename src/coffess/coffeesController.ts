@@ -2,6 +2,7 @@ import {Body, Controller, Get, Param, Post, Patch, Delete, Query} from '@nestjs/
 import {CoffeesService} from "./coffees.service";
 import {CreateCoffeeDto} from "./dto/create-coffee.dto";
 import {UpdateCoffeeDto} from "./dto/update-coffee.dto";
+import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto/pagination-query.dto';
 
 @Controller('coffees')
 export class CoffeesController {
@@ -9,8 +10,8 @@ export class CoffeesController {
     }
 
     @Get()
-    findAll(@Query() paginateQurey) {
-        return this.coffeesService.findAll();
+    findAll(@Query() paginateQurey:PaginationQueryDto) {
+        return this.coffeesService.findAll(paginateQurey);
     }
 
     @Get(':id')
