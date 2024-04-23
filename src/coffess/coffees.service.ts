@@ -6,6 +6,7 @@ import { CreateCoffeeDto } from "./dto/create-coffee.dto";
 import { UpdateCoffeeDto } from "./dto/update-coffee.dto";
 import { Flavor } from './model/Flavor.entity';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto/pagination-query.dto';
+import { Event } from 'src/events/entites/event.entity/event.entity';
 
 @Injectable()
 export class CoffeesService {
@@ -77,6 +78,7 @@ export class CoffeesService {
             coffee.recommendation++;
 
             const recommendEvent = new Event();
+            
             recommendEvent.name = "recommend_coffee";
             recommendEvent.type = 'coffe';
             recommendEvent.payload = { coffeeId: coffee.id };
