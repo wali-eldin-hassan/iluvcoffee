@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { CoffeesModule } from './coffess/coffees.module';
 import { ConfigModule } from '@nestjs/config';
+import { CommonModule } from './common/common.module';
 import * as joi from '@hapi/joi';
 
 @Module({
@@ -25,6 +26,7 @@ import * as joi from '@hapi/joi';
             autoLoadEntities: true,
         }),
         CoffeesModule,
+        CommonModule,
     ],
     controllers: [AppController],
     providers: [AppService],
